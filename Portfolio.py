@@ -7,7 +7,7 @@ import Constants as const
 
 
 # 返回的resu中 特征值按由小到大排列，对应的是其特征向量
-def get_portfolio(stock_list,state_dt,para_window):
+def get_portfolio(stock_list, state_dt, para_window):
     # 建数据库连接，设置Tushare的token
     db = pymysql.connect(host='127.0.0.1', user='root', passwd='admin', db='stock', charset='utf8')
     cursor = db.cursor()
@@ -17,7 +17,8 @@ def get_portfolio(stock_list,state_dt,para_window):
     portfilio = stock_list
 
     # 建评估时间序列, para_window参数代表回测窗口长度
-    model_test_date_start = (datetime.datetime.strptime(state_dt, '%Y-%m-%d') - datetime.timedelta(days=para_window)).strftime(
+    model_test_date_start = (
+                datetime.datetime.strptime(state_dt, '%Y-%m-%d') - datetime.timedelta(days=para_window)).strftime(
         '%Y%m%d')
     model_test_date_end = (datetime.datetime.strptime(state_dt, "%Y-%m-%d")).strftime('%Y%m%d')
     df = pro.trade_cal(exchange_id='', is_open=1, start_date=model_test_date_start, end_date=model_test_date_end)
@@ -25,11 +26,12 @@ def get_portfolio(stock_list,state_dt,para_window):
     model_test_date_seq = [(datetime.datetime.strptime(x, "%Y%m%d")).strftime('%Y-%m-%d') for x in date_temp]
 
     list_return = []
-    for i in range(len(model_test_date_seq)-4):
+    for i in range(len(model_test_date_seq) - 4):
         ti = model_test_date_seq[i]
         ri = []
         for j in range(len(portfilio)):
-            sql_select = "select * from stock_all a where a.stock_code = '%s' and a.state_dt >= '%s' and a.state_dt <= '%s' order by state_dt asc" % (portfilio[j], model_test_date_seq[i], model_test_date_seq[i + 4])
+            sql_select = "select * from stock_all a where a.stock_code = '%s' and a.state_dt >= '%s' and a.state_dt <= '%s' order by state_dt asc" % (
+            portfilio[j], model_test_date_seq[i], model_test_date_seq[i + 4])
             cursor.execute(sql_select)
             done_set = cursor.fetchall()
             db.commit()
@@ -41,7 +43,7 @@ def get_portfolio(stock_list,state_dt,para_window):
             else:
                 base_price = temp[0]
                 after_mean_price = np.array(temp[1:]).mean()
-                r = (float(after_mean_price/base_price)-1.00)*100.00
+                r = (float(after_mean_price / base_price) - 1.00) * 100.00
             ri.append(r)
             del done_set
             del temp
@@ -65,7 +67,7 @@ def get_portfolio(stock_list,state_dt,para_window):
         content_sum = np.array([x for x in content_temp1 if x >= 0.00]).sum()
         for m in range(len(content_temp1)):
             if content_temp1[m] >= 0 and content_sum > 0:
-                content_temp2.append(content_temp1[m]/content_sum)
+                content_temp2.append(content_temp1[m] / content_sum)
             else:
                 content_temp2.append(0.00)
         con_temp.append(content_temp2)
@@ -84,9 +86,10 @@ def get_portfolio(stock_list,state_dt,para_window):
 
     return resu
 
+
 if __name__ == '__main__':
     pf = ['603912.SH', '300666.SZ', '300618.SZ', '002049.SZ', '300672.SZ']
-    ans = get_portfolio(pf,'2018-01-01',90)
+    ans = get_portfolio(pf, '2018-01-01', 90)
     print('**************  Market Trend  ****************')
     print('Risk : ' + str(round(ans[0][0], 2)))
     print('Sharp ratio : ' + str(round(ans[0][2], 2)))
