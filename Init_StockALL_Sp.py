@@ -1,11 +1,12 @@
 import datetime
 import tushare as ts
 import pymysql
+import Constants as const
 
 if __name__ == '__main__':
 
     # 设置tushare pro的token并获取连接
-    ts.set_token('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    ts.set_token(const.TUSHARE_TOKEN)
     pro = ts.pro_api()
     # 设定获取日线行情的初始日期和终止日期，其中终止日期设定为昨天。
     start_dt = '20100101'

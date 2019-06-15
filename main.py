@@ -5,6 +5,7 @@ import Portfolio as pf
 from pylab import *
 import Cap_Update_daily as cap_update
 import tushare as ts
+import Constants as const
 
 def get_sharp_rate():
     db = pymysql.connect(host='127.0.0.1', user='root', passwd='admin', db='stock', charset='utf8')
@@ -36,7 +37,7 @@ if __name__ == '__main__':
     # 建立数据库连接,设置tushare的token,定义一些初始化参数
     db = pymysql.connect(host='127.0.0.1', user='root', passwd='admin', db='stock', charset='utf8')
     cursor = db.cursor()
-    ts.set_token('xxxxxxxxxxxxxxxxxxxxxxxxxx')
+    ts.set_token(const.TUSHARE_TOKEN)
     pro = ts.pro_api()
     year = 2018
     date_seq_start = str(year) + '-03-01'
