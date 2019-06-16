@@ -1,8 +1,12 @@
-﻿import warnings
+﻿# -- coding:utf-8 --
+
+import warnings
 
 import pymysql
 import tushare as ts
 from pylab import *
+from matplotlib.font_manager import FontProperties
+font_set = FontProperties(fname=r"D:\PycharmProjects\JXQuant\simfang.ttf", size=12)
 
 import Cap_Update_daily as cap_update
 import Constants as const
@@ -48,7 +52,7 @@ if __name__ == '__main__':
     pro = ts.pro_api()
     year = 2018
     date_seq_start = str(year) + '-03-01'
-    date_seq_end = str(year) + '-04-01'
+    date_seq_end = str(year) + '-03-10'
     stock_pool = ['603912.SH', '300666.SZ', '300618.SZ', '002049.SZ', '300672.SZ']
 
     # 先清空之前的测试记录,并创建中间表
@@ -62,6 +66,11 @@ if __name__ == '__main__':
     sql_wash4 = 'truncate table stock_info'
     cursor.execute(sql_wash4)
     db.commit()
+    # 清空model_ev_resu
+    sql_wash5 = 'truncate table model_ev_resu'
+    cursor.execute(sql_wash5)
+    db.commit()
+
     in_str = '('
     for x in range(len(stock_pool)):
         if x != len(stock_pool) - 1:
@@ -119,12 +128,16 @@ if __name__ == '__main__':
     print('Sharp Rate : ' + str(sharp))
     print('Risk Factor : ' + str(c_std))
 
+    # 取上证指数每日行情数据
     sql_show_btc = "select * from stock_index a where a.stock_code = 'SH' and a.state_dt >= '%s' and a.state_dt <= '%s' order by state_dt asc" % (
         date_seq_start, date_seq_end)
     cursor.execute(sql_show_btc)
     done_set_show_btc = cursor.fetchall()
     # btc_x = [x[0] for x in done_set_show_btc]
     btc_x = list(range(len(done_set_show_btc)))
+
+    # done_set_show_btc[0][3] 是指以回测的第一天的收盘价作为基准线，后续每一天的收盘价/第一天收盘价作为计算大盘收益率曲线
+    # 计算大盘收益率曲线
     btc_y = [x[3] / done_set_show_btc[0][3] for x in done_set_show_btc]
     dict_anti_x = {}
     dict_x = {}
@@ -133,10 +146,12 @@ if __name__ == '__main__':
         dict_x[done_set_show_btc[a][0]] = btc_x[a]
 
     # sql_show_profit = "select * from my_capital order by state_dt asc"
+    # 计算持仓收益率
     sql_show_profit = "select max(a.capital),a.state_dt from my_capital a where a.state_dt is not null group by a.state_dt order by a.state_dt asc"
     cursor.execute(sql_show_profit)
     done_set_show_profit = cursor.fetchall()
     profit_x = [dict_x[x[1]] for x in done_set_show_profit]
+    # 以回测第一天的持仓资金总量作为基准线，后续每一天的持仓资金总量/第一天的资金总量来计算持仓收益率曲线
     profit_y = [x[0] / done_set_show_profit[0][0] for x in done_set_show_profit]
 
 
@@ -148,12 +163,18 @@ if __name__ == '__main__':
             return ''
 
 
-    fig = plt.figure(figsize=(20, 12))
+    fig = plt.figure(figsize=(10, 4))
+    plt.title(u'收益率曲线', fontproperties=font_set)
+    # 111”表示“1×1网格，第一子图
     ax = fig.add_subplot(111)
+    # x轴转换
     ax.xaxis.set_major_formatter(FuncFormatter(c_fnx))
-
+    # 上证收益率曲线
     plt.plot(btc_x, btc_y, color='blue')
+    # 策略收益率曲线
     plt.plot(profit_x, profit_y, color='red')
+    # 显示图例
+    plt.legend(["000001 Profit Rate","My Strategy"])
 
     plt.show()
 

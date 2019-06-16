@@ -2,8 +2,11 @@ import pymysql.cursors
 
 
 class Deal(object):
+    # 总资产
     cur_capital = 0.00
+    # 股票资产
     cur_money_lock = 0.00
+    # 现金资产
     cur_money_rest = 0.00
     stock_pool = []
     stock_map1 = {}
