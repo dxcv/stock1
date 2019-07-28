@@ -22,10 +22,6 @@ class gtja_191:
     def __init__(self, start_date, end_date, index):
         # security = get_index_stocks(index)
 
-
-
-
-
         # price = get_price(security, None, end_date, '1d',
         #                   ['open', 'close', 'low', 'high', 'avg_price', 'prev_close', 'volume', 'turnover'], False,
         #                   None, 250, is_panel=1)

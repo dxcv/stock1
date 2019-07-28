@@ -2,11 +2,12 @@ from scipy.stats import rankdata
 import scipy as sp
 import numpy as np
 import pandas as pd
-import jwdata as jd
+from util import jwdata as jd
 
 '''
 http://quant.10jqka.com.cn/platform/html/article.html#id/87141839/q/mindgo_59547441_733
 '''
+
 
 class gtja_191:
 
@@ -87,7 +88,7 @@ class gtja_191:
     def alpha_004(self):
         condition1 = (pd.rolling_std(self.close, 8) < pd.rolling_sum(self.close, 2) / 2)
         condition2 = (pd.rolling_sum(self.close, 2) / 2 < (
-                    pd.rolling_sum(self.close, 8) / 8 - pd.rolling_std(self.close, 8)))
+                pd.rolling_sum(self.close, 8) / 8 - pd.rolling_std(self.close, 8)))
         condition3 = (1 <= self.volume / pd.rolling_mean(self.volume, 20))
         condition3
 
@@ -151,7 +152,7 @@ class gtja_191:
     ##################################################################
     def alpha_009(self):
         temp = (self.high + self.low) * 0.5 - (self.high.shift() + self.low.shift()) * 0.5 * (
-                    self.high - self.low) / self.volume  # 计算close_{i-1}
+                self.high - self.low) / self.volume  # 计算close_{i-1}
         result = pd.ewma(temp, alpha=2 / 7)
         alpha = result.iloc[-1, :]
         return alpha.dropna()
@@ -704,7 +705,7 @@ class gtja_191:
     ##################################################################
     def alpha_060(self):
         part1 = (self.close.iloc[-20:, :] - self.low.iloc[-20:, :]) - (
-                    self.high.iloc[-20:, :] - self.close.iloc[-20:, :])
+                self.high.iloc[-20:, :] - self.close.iloc[-20:, :])
         part2 = self.high.iloc[-20:, :] - self.low.iloc[-20:, :]
         result = self.volume.iloc[-20:, :] * part1 / part2
         alpha = result.sum()
@@ -1316,7 +1317,7 @@ class gtja_191:
         rank1 = (data1.iloc[-2, :]).rank(axis=0, pct=True)
         rank2 = ((self.volume.rank(axis=1, pct=True)).rank(axis=1, pct=True)).iloc[-1, :]
         data2 = (((self.high - self.low) / (pd.rolling_sum(self.close, window=5) / 5)) / (
-                    self.avg_price - self.close)).iloc[-1, :]
+                self.avg_price - self.close)).iloc[-1, :]
         alpha = (rank1 * rank2) / data2
         alpha = alpha.dropna()
         return alpha
@@ -1424,7 +1425,7 @@ class gtja_191:
         ## writen by Lin Qitao
         data1 = self.close.rolling(30).max().rank(axis=1, pct=True)
         alpha = (self.close.iloc[-1, :] - self.avg_price.iloc[-1, :]) / (
-                    2. / 3 * data1.iloc[-2, :] + 1. / 3 * data1.iloc[-1, :])
+                2. / 3 * data1.iloc[-2, :] + 1. / 3 * data1.iloc[-1, :])
         alpha = alpha.dropna()
         return alpha
 
@@ -1736,7 +1737,7 @@ class gtja_191:
                                                                                                             pct=True)
         rank2 = pd.rolling_apply(
             -((self.open_price * 0.15 + self.low * 0.85) - (self.open_price * 0.15 + self.low * 0.85).shift(2)) / (
-                        self.open_price * 0.15 + self.low * 0.85), 3, self.func_decaylinear).rank(axis=1, pct=True)
+                    self.open_price * 0.15 + self.low * 0.85), 3, self.func_decaylinear).rank(axis=1, pct=True)
         max_cond = rank1 > rank2
         result = rank2
         result[max_cond] = rank1[max_cond]
@@ -1765,7 +1766,7 @@ class gtja_191:
     def alpha_158(self):
         # ((HIGH-SMA(CLOSE,15,2))-(LOW-SMA(CLOSE,15,2)))/CLOSE #
         alpha = (((self.high - pd.ewma(self.close, span=14, adjust=False)) - (
-                    self.low - pd.ewma(self.close, span=14, adjust=False))) / self.close).iloc[-1, :]
+                self.low - pd.ewma(self.close, span=14, adjust=False))) / self.close).iloc[-1, :]
         alpha = alpha.dropna()
         return alpha
 
@@ -1844,7 +1845,7 @@ class gtja_191:
         ################ writen by Chen Cheng
         #######rank(((((-1*ret)*,ean(volume,20))*vwap)*(high-close)))
         data1 = (-1) * (self.close / self.close.shift() - 1) * pd.rolling_mean(self.volume, 20) * self.avg_price * (
-                    self.high - self.close)
+                self.high - self.close)
         data2 = (data1.rank(axis=1, pct=True)).iloc[-1, :]
         alpha = data2
         alpha = alpha.dropna()
@@ -2009,7 +2010,7 @@ class gtja_191:
         ######### #########corr(rank((close-tsmin(low,12))/(tsmax(high,12)-tsmin(low,12))),rank(volume),6)#############
         # 获取数据，求出RANK1
         data1 = (self.close - pd.rolling_min(self.low, window=12)) / (
-                    pd.rolling_max(self.high, window=12) - pd.rolling_min(self.low, window=12))
+                pd.rolling_max(self.high, window=12) - pd.rolling_min(self.low, window=12))
         data2 = data1.rank(axis=0, pct=True)
         # 获取数据求出rank2
         data3 = self.volume.rank(axis=0, pct=True)
@@ -2196,7 +2197,8 @@ class gtja_191:
         alpha = alpha.dropna()
         return alpha
 
+
 if __name__ == '__main__':
-    f = gtja_191(start_date= '20180621', end_date= '20190701', codes= ['002871.SZ', '000002.SZ'])
+    f = gtja_191(start_date='20180621', end_date='20190701', codes=['002871.SZ', '000002.SZ'])
 
     print(f.alpha_002())

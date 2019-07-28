@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="658a841a-19ba-4cfe-8ae4-b7b7d3611a58" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Alpha191.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AlphaAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Install_MyStock.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Seanborn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alpha/Alpha191_3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alpha/MyAlpha191.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alpha/MyAlpha191_2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alpha/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alpha/trade.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jwdata.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sklearn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/jwtrade.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyStrategy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SVM.py" beforeDir="false" afterPath="$PROJECT_DIR$/SVM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alpha/Alpha191_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/alpha/Alpha191_3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alpha/MyAlpha191.py" beforeDir="false" afterPath="$PROJECT_DIR$/alpha/MyAlpha191.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jwdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/jwdata.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,25 +17,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha/MyAlpha191.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/util/jwtrade.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
+            <state relative-caret-position="275">
+              <caret line="43" column="53" lean-forward="true" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha/Alpha191_3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-140">
+              <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
               <folding>
-                <element signature="e#138#156#0" expanded="true" />
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/alpha/Alpha191_3.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/jwdata.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="2199" column="60" selection-start-line="2199" selection-start-column="60" selection-end-line="2199" selection-end-column="60" />
+            <state relative-caret-position="115">
+              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,7 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Formatter</find>
       <find>np.</find>
       <find>trade_cal</find>
       <find>Runnig to Date</find>
@@ -91,6 +90,7 @@
       <find>__name__</find>
       <find>gtja_191</find>
       <find>alpha_031</find>
+      <find>append</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -119,9 +119,10 @@
         <option value="$PROJECT_DIR$/alpha.py" />
         <option value="$PROJECT_DIR$/alpha/trade.py" />
         <option value="$PROJECT_DIR$/Alpha191.py" />
-        <option value="$PROJECT_DIR$/alpha/MyAlpha191.py" />
         <option value="$PROJECT_DIR$/jwdata.py" />
         <option value="$PROJECT_DIR$/alpha/Alpha191_3.py" />
+        <option value="$PROJECT_DIR$/alpha/MyAlpha191.py" />
+        <option value="$PROJECT_DIR$/util/jwtrade.py" />
       </list>
     </option>
   </component>
@@ -152,6 +153,11 @@
               <item name="JXQuant" type="462c0819:PsiDirectoryNode" />
               <item name="alpha" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="JXQuant" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JXQuant" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -161,15 +167,16 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/alpha" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\PycharmProjects\JXQuant\alpha" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\PycharmProjects\JXQuant\alpha" />
       <recent name="D:\PycharmProjects\JXQuant" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PycharmProjects\JXQuant\util" />
+      <recent name="D:\PycharmProjects\JXQuant\alpha" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -184,7 +191,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Alpha191_3">
+  <component name="RunManager" selected="Python.jwtrade">
     <configuration name="Alpha191_3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="JXQuant" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -248,27 +255,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Seanborn" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="JXQuant" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Seanborn.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="jwdata" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="JXQuant" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -281,7 +267,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/jwdata.py" />
+      <option name="SCRIPT_NAME" value="D:\PycharmProjects\JXQuant\util\jwdata.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="jwtrade" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="JXQuant" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/util" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util/jwtrade.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -292,11 +299,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.jwtrade" />
         <item itemvalue="Python.Alpha191_3" />
         <item itemvalue="Python.jwdata" />
         <item itemvalue="Python.MyAlpha191 (1)" />
         <item itemvalue="Python.MyAlpha191" />
-        <item itemvalue="Python.Seanborn" />
       </list>
     </recent_temporary>
   </component>
@@ -324,14 +331,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22284909" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.22284909" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.44204852" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3018868" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5269542" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -369,8 +375,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/alpha/Alpha191_3.py</url>
-          <line>67</line>
+          <line>68</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/util/jwtrade.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -378,60 +389,53 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>print(result.iloc[-1, :])</expression-string>
+        <expression-string>stock_hold['count'][0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(result)</expression-string>
+        <expression-string>stock_hold['count']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(m)</expression-string>
+        <expression-string>len(stock_hold)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>pd.DataFrame(ap_031, columns=['alpha_031'], index=ap_031.index)</expression-string>
+        <expression-string>stock_hold['count'].isnull</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(self.close)</expression-string>
+        <expression-string>stock_hold['count'].isnull()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(alpha)</expression-string>
+        <expression-string>stock_hold.isnull().any()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(self.price)</expression-string>
+        <expression-string>stock_hold.isnull.any</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(self.price.iloc[:,:])</expression-string>
+        <expression-string>stock_hold.isnull</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(self.price['vol'].iloc[:,:])</expression-string>
+        <expression-string>stock_hold is not None</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Program Files (x86)/Python37-32/Lib/site-packages/tushare/util/dateu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Python37-32/Lib/site-packages/tushare/stock/cons.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
@@ -776,40 +780,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jwdata.py">
+    <entry file="file://$PROJECT_DIR$/alpha/MyAlpha191_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        <state relative-caret-position="460">
+          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha/MyAlpha191.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-180">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha/Alpha191_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140">
+          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/jwdata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha/MyAlpha191_2.py">
+    <entry file="file://$PROJECT_DIR$/util/jwtrade.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha/MyAlpha191.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
-          <folding>
-            <element signature="e#138#156#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha/Alpha191_3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="2199" column="60" selection-start-line="2199" selection-start-column="60" selection-end-line="2199" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="275">
+          <caret line="43" column="53" lean-forward="true" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
         </state>
       </provider>
     </entry>
