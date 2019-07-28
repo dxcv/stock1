@@ -1,4 +1,4 @@
-from sklearn import svm
+from n import svm
 import DC
 
 if __name__ == '__main__':
