@@ -1,5 +1,8 @@
 import pandas as pd
 
+### 1. 没有止损&止盈
+### 2. 没有交易成本
+### 3. 交易明细待补充
 class Trade:
     # 初始现金
     cash = 100000;
@@ -7,7 +10,7 @@ class Trade:
     # 最大持股数量
     stock_count_max = 15;
 
-    # 持仓明细
+    # 持仓明细git
     hold = pd.DataFrame({'code':['1'], 'count':[1]})
 
     # 交易记录
@@ -30,6 +33,9 @@ class Trade:
             in_hold_list = True
 
         if(target_count > hold_count):
+            if (len(stock_hold) >= 15):
+                print('超过股票最大持仓个数，停止购买')
+
             # 买入
             buy_count = target_count - hold_count
             buy_value = buy_count * price
@@ -41,12 +47,12 @@ class Trade:
             self.cash -= buy_value
 
             if(in_hold_list):
-                stock_hold['count'][0] = target_count
+                self.hold.loc[self.hold['code'] == code, 'count'] = target_count
             else:
                 target_df = pd.DataFrame({'code':[code], 'count':[target_count]})
                 self.hold = self.hold.append(target_df)
 
-            print('执行买入:', code, '买入', buy_count, '股')
+            print('执行买入:', code, '买入', buy_count, '股', '价格:', price, '；剩余现金:', self.cash)
             return
         elif(target_count < hold_count):
             # 卖出
@@ -58,9 +64,9 @@ class Trade:
                 # 清仓
                 self.hold = self.hold[~(self.hold['code'] == code)]
             else:
-                stock_hold['count'] = target_count
+                self.hold.loc[self.hold['code'] == code, 'count'] = target_count
 
-            print('执行卖出:', code, '卖出', sold_count, '股')
+            print('执行卖出:', code, '卖出', sold_count, '股', '价格:', price, '剩余现金:', self.cash)
             return
         else :
             print('交易目标与当前持仓相等，不进行任何交易')
@@ -68,29 +74,33 @@ class Trade:
 
         return
 
-    ### 卖单
-    def sell(code, sell_price, cash):
-
-
-
-        return
-
-
-    def buy(code, cash):
-        return
-
 if __name__ == '__main__':
 
     t = Trade()
 
     # 买入
-    t.order_target_value('000001.SZ', 10, 1000)
+    t.order_target_value('000001.SZ', 13, 10000)
 
-    # 买入
-    t.order_target_value('000002.SZ', 23, 50000)
+    # 清仓
+    t.order_target_value('000001.SZ', 15, 0)
 
-    # 买入
-    t.order_target_value('000001.SZ', 13, 20000)
+    # # 买入
+    # t.order_target_value('000001.SZ', 10, 1000)
+    #
+    # # 买入
+    # t.order_target_value('000002.SZ', 13, 50000)
+    #
+    # # 买入
+    # t.order_target_value('000001.SZ', 13, 20000)
+    #
+    # # 清仓
+    # t.order_target_value('000002.SZ', 25, 0)
+    #
+    # # 卖出
+    # t.order_target_value('000001.SZ', 17, 10000);
+    #
+    # # 清仓
+    # t.order_target_value('000001.SZ', 18, 0);
 
     print(t.hold)
 
