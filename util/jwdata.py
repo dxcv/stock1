@@ -1,9 +1,23 @@
 import tushare as ts
 import pandas as pd
+import datetime
+
+import warnings
+warnings.filterwarnings("ignore")
 
 ts.set_token('d3fdbde82434cd6d7897550852136449f9fcba912e3eacb47b004600')
 pro = ts.pro_api()
 
+# 获取交易日
+def get_cal(date_seq_start, date_seq_end):
+
+    # 获取交易日
+    df = pro.trade_cal(exchange_id='', is_open=1, start_date=date_seq_start, end_date=date_seq_end)
+    date_seq = list(df.iloc[:, 1])
+    # date_seq = [(datetime.datetime.strptime(x, "%Y%m%d")).strftime('%Y-%m-%d') for x in date_temp]
+    return date_seq
+
+# 获取价格
 def get_price_panel(codes, start, end):
     open_data = {}
     close_data = {}
@@ -16,8 +30,8 @@ def get_price_panel(codes, start, end):
     turnover_data = {}
 
     for code in codes:
-        # df = ts.pro_bar(ts_code=code, adj='qfq', start_date=start, end_date=end)
-        df = ts.pro_bar(ts_code=code, start_date=start, end_date=end)
+        df = ts.pro_bar(ts_code=code, adj='qfq', start_date=start, end_date=end)
+        # df = ts.pro_bar(ts_code=code, start_date=start, end_date=end)
         # 设置索引
         df.set_index('trade_date', inplace=True)
         # 按照日期顺序排序

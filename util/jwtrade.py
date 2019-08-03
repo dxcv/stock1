@@ -1,21 +1,71 @@
 import pandas as pd
+import util.jwdata as jd
+from pylab import *
 
 ### 1. 没有止损&止盈
 ### 2. 没有交易成本
 ### 3. 交易明细待补充
+### 鲁棒性待测试：停复牌的情况
 class Trade:
+
+    # 回测开始时间
+    backtest_start_date = None
+    # 回测结束时间
+    backtest_end_date = None
+    # 当前时间
+    current_day = None
+
     # 初始现金
-    cash = 100000;
+    cash = 100000
 
     # 最大持股数量
-    stock_count_max = 15;
+    stock_count_max = 15
 
     # 持仓明细git
-    hold = pd.DataFrame({'code':['1'], 'count':[1]})
-
+    hold = pd.DataFrame({'code':['1'], 'count':[1], 'avg_buy_price':[1]})
+    hold = hold.drop([0])
     # 交易记录
+    # 日期 证券资产 现金余额 总资产
+    # 当前持仓明细（股票代码 买入均价 今日收盘价 持仓数量 资产总值）
+    # daily_hold_detail =
 
-    def __init__(self):
+    daily_capital = None
+
+    # 构建函数
+    def __init__(self, backtest_start_date = '20120101', backtest_end_date = '20190801'):
+        self.backtest_start_date = backtest_start_date
+        self.backtest_end_date = backtest_end_date
+        return
+
+    # 每日运行
+    def run_daily(self, callback):
+
+        # 获取交易日
+        trade_days = jd.get_cal(self.backtest_start_date, self.backtest_end_date)
+
+
+        # 执行每日的交易回调
+        for day in trade_days:
+            self.current_day = day
+            callback(self)
+
+            self.hold.set_index('code', drop=False, inplace=True)
+            # 清算每日持仓
+            # 获取当天收盘价
+            pn = jd.get_price_panel(list(self.hold['code']), day, day)
+            self.hold['curr_close'] = pn['close', day, :]
+
+            # 当日股票市值
+            curr_stock_value = (self.hold['curr_close'] * self.hold['count']).sum()
+            curr_total_value = curr_stock_value + self.cash
+
+            today_capital = pd.DataFrame(
+                {'date': [day], 'stock_value': [curr_stock_value], 'total_value': [curr_total_value]})
+            if(self.daily_capital is None):
+                self.daily_capital = today_capital
+            else:
+                self.daily_capital = self.daily_capital.append(today_capital)
+
         return
 
     # 按目标金额下单，即将持仓市值调整至目标金额
@@ -46,14 +96,17 @@ class Trade:
 
             self.cash -= buy_value
 
+            # 加仓
             if(in_hold_list):
+                # 计算平均买入成本
+                self.hold.loc[self.hold['code'] == code, 'avg_buy_price'] = (buy_value + stock_hold['avg_buy_price'][0] * hold_count) / target_count
                 self.hold.loc[self.hold['code'] == code, 'count'] = target_count
             else:
-                target_df = pd.DataFrame({'code':[code], 'count':[target_count]})
+                # 首次持仓
+                target_df = pd.DataFrame({'code':[code], 'count':[target_count], 'avg_buy_price':[price]})
                 self.hold = self.hold.append(target_df)
 
             print('执行买入:', code, '买入', buy_count, '股', '价格:', price, '；剩余现金:', self.cash)
-            return
         elif(target_count < hold_count):
             # 卖出
             sold_count = hold_count - target_count
@@ -67,22 +120,58 @@ class Trade:
                 self.hold.loc[self.hold['code'] == code, 'count'] = target_count
 
             print('执行卖出:', code, '卖出', sold_count, '股', '价格:', price, '剩余现金:', self.cash)
-            return
         else :
             print('交易目标与当前持仓相等，不进行任何交易')
             return
 
+        print('当前持仓明细：')
+        print(self.hold)
+        print('==========================================')
+
         return
+
+    def show(self):
+        # 设置索引
+        self.daily_capital.set_index('date', inplace=True, drop=False)
+
+        # 净值曲线量纲缩放
+        basic_value = t.daily_capital['total_value'][0]
+        (t.daily_capital['total_value'] / basic_value).plot()
+
+        # 展示
+        plt.show()
+        return
+
+def daily_callback(ctx):
+
+    # ctx.order_target_value('000001.SZ', 13, 10000)
+
+    print('current day:', ctx.current_day)
+
+    return
 
 if __name__ == '__main__':
 
-    t = Trade()
+    t = Trade(backtest_start_date='20190601', backtest_end_date='20190801')
+
 
     # 买入
     t.order_target_value('000001.SZ', 13, 10000)
 
     # 清仓
-    t.order_target_value('000001.SZ', 15, 0)
+    t.order_target_value('000001.SZ', 14, 30000)
+
+    t.order_target_value('000001.SZ', 15, 15000)
+
+    t.order_target_value('000002.SZ', 6.5, 10000)
+    t.order_target_value('000002.SZ', 5.5, 5000)
+
+
+    t.run_daily(daily_callback)
+
+    print(t.daily_capital)
+
+    t.show()
 
     # # 买入
     # t.order_target_value('000001.SZ', 10, 1000)
@@ -101,7 +190,3 @@ if __name__ == '__main__':
     #
     # # 清仓
     # t.order_target_value('000001.SZ', 18, 0);
-
-    print(t.hold)
-
-    print(t.cash)
