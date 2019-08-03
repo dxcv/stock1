@@ -59,11 +59,24 @@ def get_price_panel(codes, start, end):
 
     return pl
 
+def getHS300(start=None, end=None):
+    start = (datetime.datetime.strptime(start, "%Y%m%d")).strftime('%Y-%m-%d')
+    end = (datetime.datetime.strptime(end, "%Y%m%d")).strftime('%Y-%m-%d')
+    df = ts.get_hist_data(code='hs300', start=start, end=end)
+
+    df.sort_index(inplace=True, ascending=True)
+
+    return df
+
 if __name__ == '__main__':
+
+
 
 
     start = '20190715'
     end = '20190726'
+
+    d = getHS300(start, end) # 获取沪深300指数k线数据
 
     # pl = get_price_panel(['000001.SZ', '000002.SZ', '000020.SZ', '000505.SZ'], start, end)
 

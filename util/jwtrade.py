@@ -138,6 +138,10 @@ class Trade:
         basic_value = t.daily_capital['total_value'][0]
         (t.daily_capital['total_value'] / basic_value).plot()
 
+        hs300 = jd.getHS300(self.backtest_start_date, self.backtest_end_date)
+        hs300_basic = hs300['close'][0]
+        (hs300['close'] / hs300_basic).plot()
+
         # 展示
         plt.show()
         return
@@ -152,7 +156,7 @@ def daily_callback(ctx):
 
 if __name__ == '__main__':
 
-    t = Trade(backtest_start_date='20190601', backtest_end_date='20190801')
+    t = Trade(backtest_start_date='20190601', backtest_end_date='20190802')
 
 
     # 买入
