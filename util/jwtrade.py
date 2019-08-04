@@ -150,8 +150,8 @@ class Trade:
         self.daily_capital.set_index('date', inplace=True, drop=False)
 
         # 净值曲线量纲缩放
-        basic_value = t.daily_capital['total_value'][0]
-        (t.daily_capital['total_value'] / basic_value).plot()
+        basic_value = self.daily_capital['total_value'][0]
+        (self.daily_capital['total_value'] / basic_value).plot()
 
         hs300 = jd.getHS300(self.backtest_start_date, self.backtest_end_date)
         hs300_basic = hs300['close'][0]
@@ -160,30 +160,3 @@ class Trade:
         # 展示
         plt.show()
         return
-
-def daily_callback(ctx):
-
-    # ctx.order_target_value('000001.SZ', 13, 10000)
-
-    print('current day:', ctx.current_day)
-
-    return
-
-if __name__ == '__main__':
-
-    t = Trade(backtest_start_date='20190701', backtest_end_date='20190715')
-
-    # 买入
-    t.order_target_value('000001.SZ', 13, 10000)
-    # 买入
-    t.order_target_value('000002.SZ', 5.5, 50000)
-    #买入
-    t.order_target_value('002185.SZ ', 53.1, 20000)
-    t.order_target_value('603997.SH', 2.3, 10000)
-
-
-    t.run_daily(daily_callback)
-
-    print(t.daily_capital)
-
-    t.show()
