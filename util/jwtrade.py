@@ -43,9 +43,11 @@ class Trade:
         # 获取交易日
         trade_days = jd.get_cal(self.backtest_start_date, self.backtest_end_date)
 
-
         # 执行每日的交易回调
+        pre_day = None
         for day in trade_days:
+            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+
             self.current_day = day
             callback(self)
 
@@ -53,7 +55,15 @@ class Trade:
             # 清算每日持仓
             # 获取当天收盘价
             pn = jd.get_price_panel(list(self.hold['code']), day, day)
-            self.hold['curr_close'] = pn['close', day, :]
+            curr_close = pn['close', day, :]
+            # 处理停牌的情况
+            suspend_stock_list = curr_close[isnan(curr_close)].index.tolist()
+            if(len(suspend_stock_list) == 0):
+                self.hold['curr_close'] = curr_close
+            else:
+                print('持仓中有股票停牌', suspend_stock_list)
+                suspend_hold = self.hold[np.isin(self.hold['code'], np.array(suspend_stock_list))]
+                self.hold['curr_close'] = curr_close[~isnan(curr_close)].append(suspend_hold['curr_close'])
 
             # 当日股票市值
             curr_stock_value = (self.hold['curr_close'] * self.hold['count']).sum()
@@ -66,6 +76,11 @@ class Trade:
             else:
                 self.daily_capital = self.daily_capital.append(today_capital)
 
+
+            print('今日（', day, '）持仓明细：\r\n', self.hold)
+            print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\r\n')
+
+            pre_day = day
         return
 
     # 按目标金额下单，即将持仓市值调整至目标金额
@@ -156,19 +171,15 @@ def daily_callback(ctx):
 
 if __name__ == '__main__':
 
-    t = Trade(backtest_start_date='20190601', backtest_end_date='20190802')
-
+    t = Trade(backtest_start_date='20190701', backtest_end_date='20190715')
 
     # 买入
     t.order_target_value('000001.SZ', 13, 10000)
-
-    # 清仓
-    t.order_target_value('000001.SZ', 14, 30000)
-
-    t.order_target_value('000001.SZ', 15, 15000)
-
-    t.order_target_value('000002.SZ', 6.5, 10000)
-    t.order_target_value('000002.SZ', 5.5, 5000)
+    # 买入
+    t.order_target_value('000002.SZ', 5.5, 50000)
+    #买入
+    t.order_target_value('002185.SZ ', 53.1, 20000)
+    t.order_target_value('603997.SH', 2.3, 10000)
 
 
     t.run_daily(daily_callback)
@@ -176,21 +187,3 @@ if __name__ == '__main__':
     print(t.daily_capital)
 
     t.show()
-
-    # # 买入
-    # t.order_target_value('000001.SZ', 10, 1000)
-    #
-    # # 买入
-    # t.order_target_value('000002.SZ', 13, 50000)
-    #
-    # # 买入
-    # t.order_target_value('000001.SZ', 13, 20000)
-    #
-    # # 清仓
-    # t.order_target_value('000002.SZ', 25, 0)
-    #
-    # # 卖出
-    # t.order_target_value('000001.SZ', 17, 10000);
-    #
-    # # 清仓
-    # t.order_target_value('000001.SZ', 18, 0);
