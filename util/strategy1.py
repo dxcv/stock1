@@ -12,8 +12,9 @@ def daily_callback(ctx):
     hs300 = ['002470.SZ', '000540.SZ', '601021.SH', '600050.SH', '601788.SH', '600352.SH', '601166.SH', '002602.SZ',
              '002673.SZ', '601939.SH', '600031.SH', '600010.SH', '300251.SZ', '002241.SZ', '600115.SH', '600820.SH']
 
+    # TODO window 的设置
     # gtja = ap.gtja_191(start_date=ctx.backtest_start_date, end_date=date, codes=hs300)
-    gtja = ap.gtja_191(start_date='20190601', end_date=date, codes=hs300)
+    gtja = ap.gtja_191(start_date='20190531', end_date=date, codes=hs300)
     # 选用第191号因子
     alpha = gtja.alpha_002()
 
@@ -32,22 +33,22 @@ def daily_callback(ctx):
     for s in list(sell_stocks):  # 卖出上一天持仓
 
         p = jd.get_price_panel([s], date, date)
-        if(p is None):
+        if p is None:
             print('数据异常？？？？？？？？？')
             return
         ctx.order_target_value(s, p['open'][s][0], 0)
     for s in list(buy_stocks):  # 取因子值前10调仓买入
         p = jd.get_price_panel([s], date, date)
-        if(p is None):
+        if p is None:
             print('数据异常？？？？？？？？？')
             return
-        ctx.order_target_value(s, p['open'][s][0], 10000)
+        ctx.order_target_value(s, p['open'][s][0], 20000)
 
     return
 
 if __name__ == '__main__':
 
-    t = jt.Trade(backtest_start_date='20190701', backtest_end_date='20190715')
+    t = jt.Trade(backtest_start_date='20190603', backtest_end_date='20190715', try_all=True)
 
     # # 买入
     # t.order_target_value('000001.SZ', 13, 10000)
