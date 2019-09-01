@@ -48,7 +48,7 @@ def daily_callback(ctx):
 
 if __name__ == '__main__':
 
-    t = jt.Trade(backtest_start_date='20190603', backtest_end_date='20190715', try_all=True)
+    t = jt.Trade(backtest_start_date='20190603', backtest_end_date='20190701', try_all=True)
 
     # # 买入
     # t.order_target_value('000001.SZ', 13, 10000)

@@ -1,11 +1,10 @@
 ﻿# -- coding:utf-8 --
 
-import warnings
-
 import pymysql
 import tushare as ts
-from pylab import *
 from matplotlib.font_manager import FontProperties
+from pylab import *
+
 font_set = FontProperties(fname=r"D:\PycharmProjects\JXQuant\simfang.ttf", size=12)
 
 import Cap_Update_daily as cap_update
@@ -174,7 +173,7 @@ if __name__ == '__main__':
     # 策略收益率曲线
     plt.plot(profit_x, profit_y, color='red')
     # 显示图例
-    plt.legend(["000001 Profit Rate","My Strategy"])
+    plt.legend(["000001 Profit Rate", "My Strategy"])
 
     plt.show()
 

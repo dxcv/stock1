@@ -13,7 +13,7 @@ class data_collect(object):
         db = pymysql.connect(host='127.0.0.1', user='root', passwd='admin', db='stock', charset='utf8')
         cursor = db.cursor()
         sql_done_set = "SELECT * FROM stock_all a where stock_code = '%s' and state_dt >= '%s' and state_dt <= '%s' order by state_dt asc" % (
-        in_code, start_dt, end_dt)
+            in_code, start_dt, end_dt)
         cursor.execute(sql_done_set)
         done_set = cursor.fetchall()
         if len(done_set) == 0:

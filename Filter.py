@@ -1,4 +1,5 @@
 import pymysql.cursors
+
 import Deal
 import Operator
 
@@ -18,7 +19,7 @@ def filter_main(stock_new, state_dt, predict_dt, poz):
     stock_pool_local = deal.stock_pool
     for stock in stock_pool_local:
         sql_predict = "select predict from model_ev_resu a where a.state_dt = '%s' and a.stock_code = '%s'" % (
-        predict_dt, stock)
+            predict_dt, stock)
         cursor.execute(sql_predict)
         done_set_predict = cursor.fetchall()
         predict = 0

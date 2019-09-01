@@ -18,7 +18,10 @@ class Trade:
     try_all = False
 
     # 初始现金
-    cash = 100000
+    init_cash = 100000
+
+    # 当前现金
+    cash = init_cash
 
     # 最大持股数量
     stock_hold_max = 15
@@ -55,6 +58,14 @@ class Trade:
             callback(self)
 
             self.hold.set_index('code', drop=False, inplace=True)
+
+            # 空仓
+            if len(self.hold) == 0:
+                today_capital = pd.DataFrame(
+                    {'date': [day], 'stock_value': [0], 'total_value': [self.cash]})
+                self.daily_capital = self.daily_capital.append(today_capital)
+                continue
+
             # 清算每日持仓
             # 获取当天收盘价
             pn = jd.get_price_panel(list(self.hold['code']), day, day)
@@ -165,12 +176,19 @@ class Trade:
         self.daily_capital.set_index('date', inplace=True, drop=False)
 
         # 净值曲线量纲缩放
-        basic_value = self.daily_capital['total_value'][0]
+        # basic_value = self.daily_capital['total_value'][0]
+        basic_value = self.init_cash
         (self.daily_capital['total_value'] / basic_value).plot(label="strategy1", style='b-o')
 
-        hs300 = jd.getHS300(self.backtest_start_date, self.backtest_end_date)
-        hs300_basic = hs300['close'][0]
-        (hs300['close'] / hs300_basic).plot(label="hs300", style='r-*')
+        # jd.get_price_panel()
+
+        pfyh = jd.get_price_panel(['600000.SH'], self.backtest_start_date, self.backtest_end_date)
+        pfyh = pfyh['close', :, :]['600000.SH']
+        (pfyh / pfyh[0]).plot(label="600000.SH", style='r-*')
+
+        # hs300 = jd.getHS300(self.backtest_start_date, self.backtest_end_date)
+        # hs300_basic = hs300['close'][0]
+        # (hs300['close'] / hs300_basic).plot(label="hs300", style='r-*')
 
         # 展示
         plt.grid(axis="both", linestyle='--')

@@ -1,8 +1,7 @@
-import tushare as ts
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn import datasets, linear_model
-import numpy as np
+import tushare as ts
+
+from sklearn import linear_model
 
 # 设置tushare pro的token并获取连接
 ts.set_token('d3fdbde82434cd6d7897550852136449f9fcba912e3eacb47b004600')
