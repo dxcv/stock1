@@ -1,6 +1,8 @@
 import tushare as ts
 import pandas as pd
 import datetime
+import util.JWDataFromTushare as jdt
+import util.JWDataFromDB as jdd
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -14,7 +16,7 @@ def get_cal(date_seq_start, date_seq_end):
     # 获取交易日
     df = pro.trade_cal(exchange_id='', is_open=1, start_date=date_seq_start, end_date=date_seq_end)
     date_seq = list(df.iloc[:, 1])
-    # date_seq = [(datetime.datetime.strptime(x, "%Y%m%d")).strftime('%Y-%m-%d') for x in date_temp]
+    # date_seq = [(datetime.datetime.strptime(x, "%Y%m%d")).strftime('%Y-%m-%d') for x in date_seq]
     return date_seq
 
 # 获取价格
@@ -30,12 +32,14 @@ def get_price_panel(codes, start, end):
     turnover_data = {}
 
     for code in codes:
-        df = ts.pro_bar(ts_code=code, adj='qfq', start_date=start, end_date=end)
-        # df = ts.pro_bar(ts_code=code, start_date=start, end_date=end)
-        # 设置索引
-        df.set_index('trade_date', inplace=True)
-        # 按照日期顺序排序
-        price = df.sort_values(by='trade_date', ascending=True)
+        # df = ts.pro_bar(ts_code=code, adj='qfq', start_date=start, end_date=end)
+        # # 设置索引
+        # df.set_index('trade_date', inplace=True)
+        # # 按照日期顺序排序
+        # price = df.sort_values(by='trade_date', ascending=True)
+
+        # price = jdt.get_price(code, start, end)
+        price = jdd.get_price(code, start, end)
 
         open_data[code] = price['open']
         close_data[code] = price['close']

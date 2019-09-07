@@ -17,7 +17,7 @@ plt.show()
 # print(df)
 
 
-df1 = rc.get_fast_down_time('2019-06-03', '600000.SH', 15 , 2, -0.25)
+df1 = rc.get_fast_down_time('2019-06-03', '600000.SH', 15 , 2, -0.3)
 
 print(df1)
 

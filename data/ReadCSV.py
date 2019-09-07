@@ -1,6 +1,8 @@
 import pandas as pd
 from pylab import *
 
+data_dict = {}
+
 def get_ma(df, window):
     ma = df.rolling(window=window).mean()
     ma = ma.dropna()
@@ -9,7 +11,11 @@ def get_ma(df, window):
 
 def get_data(code):
     # 获取某一天的分钟数据
-    df = pd.read_csv('D:\\export\\'+code, dtype={'time':str}, sep = ",")
+
+    df = data_dict.get(code)
+    if df is None:
+        df = pd.read_csv('D:\\export\\'+code, dtype={'time':str}, sep = ",")
+        data_dict[code] = df
 
     df['datetime'] = df['date'] + ' ' + df['time']
 

@@ -11,7 +11,7 @@ def daily_callback(ctx):
     # hs300 = ['002470.SZ']
 
     # 先卖空
-    code = '600000.SH'
+    code = '000063.SZ'
 
     f_date = (datetime.datetime.strptime(date, "%Y%m%d")).strftime('%Y-%m-%d')
 
