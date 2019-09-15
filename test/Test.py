@@ -28,13 +28,13 @@ for code in jd.get_hs300_codes():
     print(code)
     print(df2)
 
-# print(df1)
-
 df2 = rc.get_data('600000.SH')
 
 df2 = df2[df2['date'] == '2019-06-03'][['close']]
 
 res = pd.concat([rc.get_ma(df2['close'], 15), rc.get_ma(df2['close'], 2)], join='inner', axis=1)
+
+print(res)
 
 res.plot()
 plt.show()
