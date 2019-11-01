@@ -63,7 +63,11 @@ class Trade:
             if len(self.hold) == 0:
                 today_capital = pd.DataFrame(
                     {'date': [day], 'stock_value': [0], 'total_value': [self.cash]})
-                self.daily_capital = self.daily_capital.append(today_capital)
+
+                if self.daily_capital is None:
+                    self.daily_capital = today_capital
+                else:
+                    self.daily_capital = self.daily_capital.append(today_capital)
                 continue
 
             # 清算每日持仓
@@ -162,7 +166,8 @@ class Trade:
 
             print('执行卖出:', code, '卖出', sold_count, '股', '价格:', price, '剩余现金:', self.cash)
         else :
-            print('交易目标与当前持仓相等，不进行任何交易')
+            if target_value >= 0:
+                print('交易目标与当前持仓相等，不进行任何交易')
             return
 
         # print('当前持仓明细：')

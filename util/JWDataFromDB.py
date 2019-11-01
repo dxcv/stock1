@@ -5,6 +5,10 @@ import datetime
 # 初始化数据库连接，使用pymysql模块
 engine = create_engine('mysql+pymysql://root:admin@localhost:3306/my_stock')
 
+
+'''
+    从本地数据库获取日线数据
+'''
 def get_price(code=None, start_date=None, end_date=None, ascending=True):
 
     start = datetime.datetime.strptime(start_date, "%Y%m%d").strftime('%Y-%m-%d')
@@ -17,12 +21,24 @@ def get_price(code=None, start_date=None, end_date=None, ascending=True):
         WHERE `code` = '%s' AND date >= '%s' AND date<= '%s' ORDER BY date %s
           '''%(code, start, end, 'ASC' if ascending else 'DESC')
 
-
     # read_sql_query的两个参数: sql语句， 数据库连接
     df = pd.read_sql_query(sql, engine)
 
     df['trade_date'] = [(datetime.datetime.strptime(x, "%Y-%m-%d")).strftime('%Y%m%d') for x in df['trade_date'].values]
 
     df.set_index('trade_date', inplace=True)
+
+    return df
+
+
+'''
+    获取股票列表
+'''
+def get_stock_list():
+
+    sql = '''
+            select * from stock_list
+          '''
+    df = pd.read_sql_query(sql, engine)
 
     return df
