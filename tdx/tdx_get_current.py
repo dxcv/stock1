@@ -1,7 +1,5 @@
 from pytdx.hq import TdxHq_API
 import pandas as pd
-
-from util.mylogger import logger
 import time
 import sys
 import getopt
@@ -11,6 +9,9 @@ curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 print(rootPath)
 sys.path.append(rootPath)
+
+from util.mylogger import logger
+
 
 api = TdxHq_API()
 
