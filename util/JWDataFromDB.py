@@ -1,6 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
-import  datetime
+import datetime
 
 # 初始化数据库连接，使用pymysql模块
 engine = create_engine('mysql+pymysql://root:admin@localhost:3306/my_stock')

@@ -1,0 +1,69 @@
+2019-11-01 21:09:01,003 - util.mylogger - INFO - start loop query
+2019-11-01 21:09:01,163 - util.mylogger - INFO - connected... ip=119.147.212.81, pause_second=0.5s start loop query 
+2019-11-01 21:09:01,164 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:01,204 - util.mylogger - INFO - get_security_quotes finished, cost=40ms
+2019-11-01 21:09:01,220 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:01,724 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:01,770 - util.mylogger - INFO - get_security_quotes finished, cost=45ms
+2019-11-01 21:09:01,780 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:02,283 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:02,327 - util.mylogger - INFO - get_security_quotes finished, cost=42ms
+2019-11-01 21:09:02,333 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:02,833 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:02,881 - util.mylogger - INFO - get_security_quotes finished, cost=47ms
+2019-11-01 21:09:02,888 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:03,390 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:03,433 - util.mylogger - INFO - get_security_quotes finished, cost=41ms
+2019-11-01 21:09:03,442 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:03,946 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:03,987 - util.mylogger - INFO - get_security_quotes finished, cost=40ms
+2019-11-01 21:09:03,996 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:04,500 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:04,547 - util.mylogger - INFO - get_security_quotes finished, cost=46ms
+2019-11-01 21:09:04,556 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:05,059 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:05,101 - util.mylogger - INFO - get_security_quotes finished, cost=41ms
+2019-11-01 21:09:05,110 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:05,614 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:05,654 - util.mylogger - INFO - get_security_quotes finished, cost=40ms
+2019-11-01 21:09:05,663 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:06,164 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:06,206 - util.mylogger - INFO - get_security_quotes finished, cost=41ms
+2019-11-01 21:09:06,215 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:06,719 - util.mylogger - INFO - get_security_quotes start 
+2019-11-01 21:09:06,761 - util.mylogger - INFO - get_security_quotes finished, cost=41ms
+2019-11-01 21:09:06,770 - util.mylogger - INFO - 
+     code  reversed_bytes0  active1  price  last_close
+0  000001         14998615     4694  16.86       16.26
+1  600300         15000007     1118   2.94        2.94
+2019-11-01 21:09:07,274 - util.mylogger - INFO - get_security_quotes start 
