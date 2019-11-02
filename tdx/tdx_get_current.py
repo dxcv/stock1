@@ -12,7 +12,6 @@ sys.path.append(rootPath)
 
 from util.mylogger import logger
 
-
 api = TdxHq_API()
 
 pd.set_option('display.max_columns', None)
@@ -20,7 +19,32 @@ pd.set_option('display.max_columns', None)
 
 def is_trading_hour():
     current_time = time.strftime("%H:%M:%S", time.localtime())
-    return (current_time >= '09:30' and current_time <= '11:30') or (current_time >= '13:00' and current_time <= '15:00')
+    return (current_time >= '09:30' and current_time <= '11:30') or (
+            current_time >= '13:00' and current_time <= '15:00')
+
+
+def execute_query(api):
+    """
+    执行查询
+    :param api:
+    :return:
+    """
+    logger.info("get_security_quotes start ")
+    start = time.time()
+    data = api.get_security_quotes([(0, '000001'), (1, '600300')])
+    end = time.time()
+    logger.info("get_security_quotes finished, cost=" + str(int((end - start) * 1000)) + "ms")
+    data_df = api.to_df(data)
+
+    display_columns = [
+        'code',
+        'reversed_bytes0',
+        'active1',
+        'price',
+        'last_close',
+    ]
+
+    logger.info("\r\n" + str(data_df[display_columns]))
 
 
 def loop_query(ip, pause_second, force_loop):
@@ -29,7 +53,7 @@ def loop_query(ip, pause_second, force_loop):
     """
 
     if api.connect(ip, 7709):
-        logger.info("connected... ip=%s, pause_second=%ss start loop query " % (ip, pause_second))
+        logger.info("connected. ip=%s, pause_second=%ss start loop query " % (ip, pause_second))
         while True:
 
             # 非强制模型下（正常情况），不是交易时间停止查询
@@ -37,28 +61,14 @@ def loop_query(ip, pause_second, force_loop):
                 time.sleep(10)
                 return
 
-            logger.info("get_security_quotes start ")
-            start = time.time()
-            data = api.get_security_quotes([(0, '000001'), (1, '600300')])
-            end = time.time()
-            logger.info("get_security_quotes finished, cost=" + str(int((end - start) * 1000)) + "ms")
-            data_df = api.to_df(data)
-
-            display_columns = [
-                'code',
-                'reversed_bytes0',
-                'active1',
-                'price',
-                'last_close',
-            ]
-
-            logger.info("\r\n" + str(data_df[display_columns]))
+            execute_query(api)
 
             time.sleep(pause_second)
 
         api.disconnect()
-
-    logger.info("disconnected...  ")
+        logger.info("disconnected...  ")
+    else:
+        logger.info("connect %s failed." % ip)
 
 
 if __name__ == '__main__':
